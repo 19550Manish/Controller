@@ -18,7 +18,6 @@ public class AccountController {
 		
 		System.out.println(name);
 		for(Account account : accountList ) {
-			System.out.println(account.getName() + " -- ");
 			if(account.getName().equals(name))
 				return account;
 		}
