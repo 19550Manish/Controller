@@ -7,10 +7,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.ArrayList;
 @RestController
 public class AccountController {
 	
+	ArrayList accountList = new ArrayList<Account>();
+	
+	@GetMapping("/account/{name}")
+    public Account getAccount(@PathVariable String name) {
+		
+		System.out.println(name);
+		for(Account account : accountList ) {
+			System.out.println(account.getName() + " -- ");
+			if(account.getName().equals(name))
+				return account;
+		}
+		
+		System.out.println("Acccount Not found");
+		return null;
+	}
 	
 	@PostMapping()
 	String postCall(@RequestBody Account account) {
@@ -20,7 +35,9 @@ public class AccountController {
 		System.out.println("pin " +account.getPin());
 		System.out.println("BalanceAmount" +account.getBalanceAmount());
 		System.out.println("Status " +account.getStatus());
-		return "Account controller";
+		accountList.add(account);
+		return "Account is created";
 	}
+	
 	
 }
